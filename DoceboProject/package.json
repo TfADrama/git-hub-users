@@ -10,9 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.8.0",
     "axios": "^0.19.2",
     "react": "16.9.0",
-    "react-native": "0.61.5"
+    "react-native": "0.61.5",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "github-parse-link": "1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -20,12 +25,16 @@
     "@react-native-community/eslint-config": "^0.0.7",
     "@types/react": "^16.9.22",
     "@types/react-native": "^0.61.17",
+    "@types/react-redux": "5.0.19",
+    "@types/redux-logger": "3.0.6",
     "babel-jest": "^25.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "16.9.0",
+    "reactotron-react-native": "^4.0.3",
+    "redux-logger": "^3.0.6",
     "typescript": "^3.8.2"
   },
   "jest": {
