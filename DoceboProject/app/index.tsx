@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {fetchUsers} from './api/usersAPI';
+import {fetchUsers} from './api/users';
 
 export default class App extends Component {
-  componentDidMount() {
-    fetchUsers();
+  async componentDidMount() {
+    const users = await fetchUsers();
+    console.log('=================users===================');
+    console.log(users);
+    console.log('====================================');
   }
 
   render() {
