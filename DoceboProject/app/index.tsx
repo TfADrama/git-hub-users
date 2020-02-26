@@ -1,15 +1,7 @@
-import React, {Component} from 'react';
-import {fetchUsers} from './api/users';
+// import { createAppContainer } from 'react-navigation';
+// import { HotelRoutes } from './config/routes';
+import ListUsersScreen from './screens/ListUsersScreen';
 
-export default class App extends Component {
-  async componentDidMount() {
-    const users = await fetchUsers();
-    console.log('=================users===================');
-    console.log(users);
-    console.log('====================================');
-  }
+const App = ListUsersScreen;
 
-  render() {
-    return null;
-  }
-}
+export default App;

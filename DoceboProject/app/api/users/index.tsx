@@ -21,7 +21,8 @@ export const fetchUsers = async (offset = 0, limit = 10): Promise<Object> => {
 
     return {data, next};
   } catch (error) {
-    return {};
+    console.log('fetching users: ', error);
+    return {data: [], next: ''};
   }
 };
 
