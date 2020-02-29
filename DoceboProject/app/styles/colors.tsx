@@ -1,11 +1,11 @@
 export const primaryColor = {
-  normal: '#f3e5f5',
+  normal: '#FAFBFC',
   light: '#fff',
-  dark: '#c0b3c2',
+  dark: '#24292E',
 };
 
 export const secondaryColor = {
-  normal: '#ff80ab',
-  light: '#ffb2dd',
-  dark: '#836fa9',
+  normal: '#1269D3',
+  light: '#F1F8FF',
+  // dark: '#836fa9',
 };
