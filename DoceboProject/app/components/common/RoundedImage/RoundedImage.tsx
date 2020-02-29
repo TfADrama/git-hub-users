@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet} from 'react-native';
 import {ProgressiveImage} from '../ProgressiveImage';
 
-export default ({placeholderSource, source, style}) => (
+type RoundedImageProps = {
+  placeholderSource: object;
+  source: object;
+  style: object;
+};
+
+const RoundedImage: FunctionComponent<RoundedImageProps> = ({
+  placeholderSource,
+  source,
+  style,
+}) => (
   <ProgressiveImage
     style={[styles.container, style]}
     sourceImgStyle={[styles.container, style]}
@@ -17,5 +27,6 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 50,
   },
-  img: {},
 });
+
+export default RoundedImage;

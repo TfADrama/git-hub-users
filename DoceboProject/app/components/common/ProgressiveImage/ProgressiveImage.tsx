@@ -3,7 +3,7 @@ import {View, Animated, ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
-import {Colors} from '../../styles';
+import {Colors} from '../../../styles';
 
 const AnimatedActivityIndicator = Animated.createAnimatedComponent(
   ActivityIndicator,
