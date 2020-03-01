@@ -7,6 +7,8 @@ import {
   getUsersSuccessAction,
   getMoreUsersRequestAction,
   getMoreUsersSuccessAction,
+  getMoreUsersFailureAction,
+  getUsersFailureAction,
 } from './actions';
 
 export const getUsersAction = (): ThunkAction<
@@ -17,17 +19,22 @@ export const getUsersAction = (): ThunkAction<
 > => async dispatch => {
   dispatch(getUsersRequestAction());
 
-  const {data, next} = await fetchUsers();
+  try {
+    const {data, next} = await fetchUsers();
 
-  setTimeout(() => {
-    console.log('time');
-    dispatch(
-      getUsersSuccessAction({
-        users: data,
-        nextLink: next,
-      }),
-    );
-  }, 5000);
+    setTimeout(() => {
+      console.log('time');
+      dispatch(
+        getUsersSuccessAction({
+          users: data,
+          nextLink: next,
+        }),
+      );
+    }, 5000);
+  } catch (error) {
+    console.log(error);
+    dispatch(getUsersFailureAction());
+  }
 };
 
 export const getUsersWithLinkAction = (
@@ -35,12 +42,17 @@ export const getUsersWithLinkAction = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async dispatch => {
   dispatch(getMoreUsersRequestAction());
 
-  const {data, next} = await fetchUsersWithLink(link);
+  try {
+    const {data, next} = await fetchUsersWithLink(link);
 
-  dispatch(
-    getMoreUsersSuccessAction({
-      users: data,
-      nextLink: next,
-    }),
-  );
+    dispatch(
+      getMoreUsersSuccessAction({
+        users: data,
+        nextLink: next,
+      }),
+    );
+  } catch (error) {
+    console.log(error);
+    dispatch(getMoreUsersFailureAction());
+  }
 };

@@ -47,7 +47,7 @@ class ListUsersScreen extends Component<Props, State> {
     dispatch(getUsersWithLinkAction(nextLink));
   };
 
-  renderAppActivityIndicator = () => {
+  renderActivityIndicator = () => {
     const {isLoading} = this.props;
     if (!isLoading) return null;
 
@@ -79,7 +79,7 @@ class ListUsersScreen extends Component<Props, State> {
     return (
       <SafeAreaView style={styles.container}>
         {this.renderUsersList()}
-        {this.renderAppActivityIndicator()}
+        {this.renderActivityIndicator()}
       </SafeAreaView>
     );
   }
