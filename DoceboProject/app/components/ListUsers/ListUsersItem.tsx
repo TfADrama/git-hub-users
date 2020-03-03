@@ -4,13 +4,7 @@ import {RoundedImage} from '../common/RoundedImage';
 import AccountCircle from '../../assets/icons/AccountCircle/baseline_account_circle_white_48pt.png';
 import {PROFILE_IMG_SIZE, PROFILE_IMG_RADIUS} from '../../styles/spacing';
 import {Spacing, Colors} from '../../styles';
-
-const NavigationArrow = Platform.select({
-  android: () =>
-    require('../../assets/icons/ArrowForward/android/baseline_arrow_forward_white_48pt.png'),
-  ios: () =>
-    require('../../assets/icons/ArrowForward/ios/baseline_arrow_forward_ios_white_48pt.png'),
-});
+import {Icon} from 'react-native-elements';
 
 type ListUsersItemProps = {
   imgURL: string;
@@ -20,26 +14,42 @@ type ListUsersItemProps = {
 const ListUsersItem: FunctionComponent<ListUsersItemProps> = ({
   imgURL,
   title,
-}) => (
-  <View style={styles.container}>
-    <View style={styles.leftWrapper}>
-      <RoundedImage
-        style={styles.userImg}
-        source={{uri: imgURL}}
-        placeholderSource={AccountCircle}
+}) => {
+  const NavigationArrow = Platform.select({
+    android: (
+      <Icon
+        name="arrow-forward"
+        type="materialIcons"
+        color={Colors.primaryColor.light}
+        size={30}
       />
-      <Text style={styles.textLbl} ellipsizeMode="tail" numberOfLines={1}>
-        {title}
-      </Text>
-    </View>
+    ),
+    ios: (
+      <Icon
+        name="keyboard-arrow-right"
+        type="materialIcons"
+        color={Colors.primaryColor.light}
+        size={30}
+      />
+    ),
+  });
 
-    <Image
-      resizeMode={'contain'}
-      style={styles.img}
-      source={NavigationArrow()}
-    />
-  </View>
-);
+  return (
+    <View style={styles.container}>
+      <View style={styles.leftWrapper}>
+        <RoundedImage
+          style={styles.userImg}
+          source={{uri: imgURL}}
+          placeholderSource={AccountCircle}
+        />
+        <Text style={styles.textLbl} ellipsizeMode="tail" numberOfLines={1}>
+          {title}
+        </Text>
+      </View>
+      {NavigationArrow}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -62,11 +72,6 @@ const styles = StyleSheet.create({
     flexShrink: 2,
     marginHorizontal: Spacing.DEFAULT_SPACING,
     color: Colors.primaryColor.normal,
-  },
-  img: {
-    height: 30,
-    width: 30,
-    tintColor: Colors.primaryColor.normal,
   },
 });
 

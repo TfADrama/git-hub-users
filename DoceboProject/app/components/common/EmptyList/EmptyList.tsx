@@ -1,15 +1,21 @@
 import React, {FunctionComponent} from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageSourcePropType} from 'react-native';
 import {Spacing, Colors, Typography} from '../../../styles';
+import {Icon} from 'react-native-elements';
 
 type EmptyListProps = {
-  imageSource: object;
   title: string;
 };
 
-const EmptyList: FunctionComponent<EmptyListProps> = ({imageSource, title}) => (
+const EmptyList: FunctionComponent<EmptyListProps> = ({title}) => (
   <View style={styles.container}>
-    <Image style={styles.img} source={imageSource} />
+    <Icon
+      name="users"
+      type="font-awesome"
+      color={Colors.primaryColor.normal}
+      size={50}
+      iconStyle={styles.icon}
+    />
     <Text style={styles.text}>{title}</Text>
   </View>
 );
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
     ...Typography.title1,
     color: Colors.primaryColor.normal,
   },
-  img: {
+  icon: {
     marginBottom: Spacing.MAX_SPACING,
   },
 });
