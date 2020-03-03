@@ -1,7 +1,14 @@
-import {createStore, compose, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import {createStore, compose, applyMiddleware, Action} from 'redux';
+import thunk, {ThunkAction} from 'redux-thunk';
 import logger from 'redux-logger';
-import {rootReducers} from './reducers';
+import {rootReducers, RootState} from './reducers';
+
+export type AppThunkType<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 const middleware = [thunk];
 

@@ -52,3 +52,25 @@ export function getMoreUsersFailureAction(): UserActionTypes {
     type: GET_MORE_USERS_FAILURE,
   };
 }
+
+/**
+ * SEARCH USERS ACTIONS
+ */
+// export function getUsersRequestAction(): UserActionTypes {
+//   return {
+//     type: GET_USERS_REQUEST,
+//   };
+// }
+
+// export function getUsersSuccessAction(usersList: Users): UserActionTypes {
+//   return {
+//     type: GET_USERS_SUCCESS,
+//     payload: usersList,
+//   };
+// }
+
+// export function getUsersFailureAction(): UserActionTypes {
+//   return {
+//     type: GET_USERS_FAILURE,
+//   };
+// }

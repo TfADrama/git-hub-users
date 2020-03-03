@@ -1,7 +1,4 @@
-import {ThunkAction} from 'redux-thunk';
-import {Action} from 'redux';
-import {RootState} from '../../../store/reducers';
-import {fetchUsers, fetchUsersWithLink} from '../../../api/users';
+import {fetchUsers, fetchUsersWithLink} from '../../../api/users/listUsers';
 import {
   getUsersRequestAction,
   getUsersSuccessAction,
@@ -10,13 +7,9 @@ import {
   getMoreUsersFailureAction,
   getUsersFailureAction,
 } from './actions';
+import {AppThunkType} from '../../../store';
 
-export const getUsersAction = (): ThunkAction<
-  void,
-  RootState,
-  unknown,
-  Action<string>
-> => async dispatch => {
+export const getUsersAction = (): AppThunkType => async dispatch => {
   dispatch(getUsersRequestAction());
 
   try {
@@ -39,7 +32,7 @@ export const getUsersAction = (): ThunkAction<
 
 export const getUsersWithLinkAction = (
   link: string,
-): ThunkAction<void, RootState, unknown, Action<string>> => async dispatch => {
+): AppThunkType => async dispatch => {
   dispatch(getMoreUsersRequestAction());
 
   try {

@@ -5,19 +5,19 @@ import {StyleSheet, SafeAreaView} from 'react-native';
 import {Colors} from '../../styles';
 import {ListUsersList} from '../../components/ListUsers';
 import {AppActivityIndicator} from '../../components/common/AppActivityIndicator';
-import {Action} from 'redux';
-import {ThunkAction} from 'redux-thunk';
-import {RootState} from '../../store/reducers';
+import {searchUser} from '../../api/users/searchUsers';
+import {SearchBar} from './../../components/common/SearchBar';
+import {UsersReducerType} from './redux/reducer';
+import {AppThunkType} from '../../store';
 
-type Props = {
-  dispatch: Dispatch<ThunkAction<void, RootState, unknown, Action<string>>>;
-  isLoading: boolean;
-  usersArray: Array<object>;
-  nextLink: string | undefined;
+type Props = ReturnType<typeof mapStateToProps> & {
+  dispatch: Dispatch<AppThunkType>;
+  isSearching: boolean;
 };
 
 type State = {
   isRefreshing: boolean;
+  keywordSearch: string;
 };
 
 class ListUsersScreen extends Component<Props, State> {
@@ -25,12 +25,17 @@ class ListUsersScreen extends Component<Props, State> {
     super(props);
     this.state = {
       isRefreshing: false,
+      keywordSearch: '',
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {dispatch} = this.props;
     dispatch(getUsersAction());
+    const u = await searchUser('tom');
+    console.log('=================SEARCH USERS===================');
+    console.log(u);
+    console.log('====================================');
   }
 
   onRefresh = async () => {
@@ -38,6 +43,10 @@ class ListUsersScreen extends Component<Props, State> {
     // this.setState({isRefreshing: true});
     dispatch(getUsersAction());
     // this.setState({isRefreshing: false});
+  };
+
+  updateSearch = (keywordSearch: string) => {
+    this.setState({keywordSearch});
   };
 
   loadMoreUsers = () => {
@@ -76,8 +85,16 @@ class ListUsersScreen extends Component<Props, State> {
   };
 
   render() {
+    const {keywordSearch} = this.state;
+    const {isSearching} = this.props;
     return (
       <SafeAreaView style={styles.container}>
+        <SearchBar
+          onChangeText={this.updateSearch}
+          value={keywordSearch}
+          showLoading={isSearching}
+          onSubmit={a => console.log(a)}
+        />
         {this.renderUsersList()}
         {this.renderActivityIndicator()}
       </SafeAreaView>
@@ -92,10 +109,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({users}: RootState) => ({
+const mapStateToProps = ({users}: {users: UsersReducerType}) => ({
   usersArray: users.users,
   isLoading: users.isLoading,
   nextLink: users.nextLink,
+  isSearching: users.isSearching,
 });
 
 export default connect(mapStateToProps)(ListUsersScreen);
