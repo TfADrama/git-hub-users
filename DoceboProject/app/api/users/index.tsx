@@ -28,9 +28,10 @@ export const fetchUsers = async (offset = 0, limit = 10): Promise<Object> => {
 
 /**
  * Fetches users from the GIT HUB API given a link.
- * Used to fetch a new chunk of users
+ * Used to fetch a new chunk of users given a link that represents the next chunk
+ * from a previous request.
  *
- * @argument link A link to get a new chunk of users.
+ * @argument link A link to get the new chunk of users.
  *
  * @returns An object with:
  *          - data = Array of GitHub users,
@@ -38,14 +39,9 @@ export const fetchUsers = async (offset = 0, limit = 10): Promise<Object> => {
  * @throws Unexpected errors may occur while fetching users.
  */
 export const fetchUsersWithLink = async (link: string): Promise<Object> => {
-  try {
-    const response = await axios.get(link);
-    const data = response.data;
-    const {next} = parse(response.headers.link);
+  const response = await axios.get(link);
+  const data = response.data;
+  const {next} = parse(response.headers.link);
 
-    return {data, next};
-  } catch (error) {
-    console.log('fetching users with link: ', error);
-    throw new Error(error);
-  }
+  return {data, next};
 };

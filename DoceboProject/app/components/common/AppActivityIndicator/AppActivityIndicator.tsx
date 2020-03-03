@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text} from 'react-native';
-import {OverlayView} from '.';
+import OverlayView from './OverlayView';
 import {Colors, Spacing, Typography} from '../../../styles';
 
 const AppActivityIndicator = ({text, color = Colors.primaryColor.dark}) => (
