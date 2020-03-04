@@ -39,9 +39,8 @@ export const fetchUsers = async (limit = 10): Promise<Object> => {
  * @throws Unexpected errors may occur while fetching users.
  */
 export const fetchUsersWithLink = async (link: string): Promise<Object> => {
-  const response = await axios.get(link);
-  const data = response.data;
-  const {next} = parse(response.headers.link);
+  const {data, headers} = await axios.get(link);
+  const {next} = parse(headers.link);
 
   return {data, next};
 };

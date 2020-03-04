@@ -8,3 +8,8 @@ export const DEFAULT_RADIUS = 5;
  */
 export const PROFILE_IMG_SIZE = 70;
 export const PROFILE_IMG_RADIUS = PROFILE_IMG_SIZE / 2;
+
+/**
+ * Buttons
+ */
+export const DEFAULT_BUTTON_HEIGHT = 40;

@@ -4,6 +4,14 @@ import {
   UserActionTypes,
   GET_MORE_USERS_REQUEST,
   GET_MORE_USERS_SUCCESS,
+  SEARCH_USERS_SUCCESS,
+  SEARCH_USERS_REQUEST,
+  SEARCH_USERS_FAILURE,
+  GET_USERS_FAILURE,
+  REFRESH_USERS_REQUEST,
+  REFRESH_USERS_SUCCESS,
+  REFRESH_USERS_FAILURE,
+  GET_MORE_USERS_FAILURE,
 } from './types';
 
 export interface UsersReducerType {
@@ -12,6 +20,8 @@ export interface UsersReducerType {
   isLoading: boolean;
   isRefreshing: boolean;
   isSearching: boolean;
+  isSearchResults: boolean;
+  isLoadMoreFailed: boolean;
 }
 
 const initialState = {
@@ -20,6 +30,8 @@ const initialState = {
   isLoading: false,
   isRefreshing: false,
   isSearching: false,
+  isSearchResults: false,
+  isLoadMoreFailed: false,
 };
 
 export default function(
@@ -27,22 +39,83 @@ export default function(
   action: UserActionTypes,
 ) {
   switch (action.type) {
-    case GET_USERS_SUCCESS:
-      return {
-        ...state,
-        // isLoading: false,
-        ...action.payload,
-      };
-    case GET_MORE_USERS_SUCCESS:
-      return {
-        users: [...state.users, ...action.payload.users],
-        nextLink: action.payload.nextLink,
-      };
-    case GET_MORE_USERS_REQUEST:
+    /**
+     * Requests
+     */
     case GET_USERS_REQUEST:
       return {
         ...state,
-        // isLoading: true,
+        isLoading: true,
+      };
+    case SEARCH_USERS_REQUEST:
+      return {
+        ...state,
+        isSearching: true,
+      };
+    case REFRESH_USERS_REQUEST:
+      return {
+        ...state,
+        isRefreshing: true,
+      };
+    case GET_MORE_USERS_REQUEST:
+      return {
+        ...state,
+        isLoadMoreFailed: false,
+      };
+
+    /**
+     * SUCCESS
+     */
+    case SEARCH_USERS_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isSearching: false,
+        isSearchResults: true,
+      };
+    case GET_USERS_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isLoading: false,
+        isSearchResults: false,
+      };
+    case GET_MORE_USERS_SUCCESS:
+      return {
+        ...state,
+        users: [...state.users, ...action.payload.users],
+        nextLink: action.payload.nextLink,
+      };
+    case REFRESH_USERS_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isRefreshing: false,
+        isSearchResults: false,
+      };
+
+    /**
+     * FAILURE
+     */
+    case SEARCH_USERS_FAILURE:
+      return {
+        ...state,
+        isSearching: false,
+      };
+    case GET_USERS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case REFRESH_USERS_FAILURE:
+      return {
+        ...state,
+        isRefreshing: false,
+      };
+    case GET_MORE_USERS_FAILURE:
+      return {
+        ...state,
+        isLoadMoreFailed: true,
       };
     default:
       return state;

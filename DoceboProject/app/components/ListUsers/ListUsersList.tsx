@@ -11,33 +11,47 @@ import ListUsersItem from './ListUsersItem';
 import {Colors, Spacing} from '../../styles';
 import {AppRefreshControl} from '../common/AppRefreshControl';
 import EmptyList from '../common/EmptyList/EmptyList';
-import UsersIcon from '../../assets/icons/Users/baseline_people_outline_white_48pt.png';
 import {EMPTY_LIST_TITLE} from '../../screens/ListUsers/strings';
+import {AppButton} from '../common/AppButton';
 
-type ListUsersListProps = {
+type Props = {
   data: Array<object>;
   hasMoreData: boolean;
   isRefreshing: boolean;
+  showLoadMoreButton: boolean;
   onEndReached(): void;
   onRefresh(): void;
   onPress(username: string): void;
 };
 
-export const ListUsersList: FunctionComponent<ListUsersListProps> = ({
+export const ListUsersList: FunctionComponent<Props> = ({
   data = [],
   hasMoreData = false,
   onEndReached,
   isRefreshing = false,
   onRefresh,
   onPress,
+  showLoadMoreButton = false,
 }) => {
-  const listFooterComponent = () =>
-    hasMoreData && (
+  const listFooterComponent = () => {
+    if (!hasMoreData) return null;
+
+    if (showLoadMoreButton) {
+      return (
+        <AppButton
+          title="Load More"
+          style={styles.loadMoreBtn}
+          onPress={onEndReached}
+        />
+      );
+    }
+
+    return (
       <ActivityIndicator size="small" color={Colors.secondaryColor.normal} />
     );
-  const listEmptyComponent = () => (
-    <EmptyList title={EMPTY_LIST_TITLE} imageSource={UsersIcon} />
-  );
+  };
+
+  const listEmptyComponent = () => <EmptyList title={EMPTY_LIST_TITLE} />;
 
   const renderRefreshControl = () =>
     Platform.select({
@@ -75,7 +89,7 @@ export const ListUsersList: FunctionComponent<ListUsersListProps> = ({
       contentContainerStyle={{flexGrow: 1}} // Added to center the empty list component
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
-      onEndReached={onEndReached}
+      onEndReached={!showLoadMoreButton ? onEndReached : undefined}
       onEndReachedThreshold={0.01}
     />
   );
@@ -90,5 +104,8 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     marginVertical: Spacing.MAX_SPACING,
+  },
+  loadMoreBtn: {
+    marginBottom: 20,
   },
 });

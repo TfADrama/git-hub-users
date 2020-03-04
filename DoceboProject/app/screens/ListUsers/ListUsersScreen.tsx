@@ -1,59 +1,50 @@
 import React, {Component, Dispatch} from 'react';
-import {getUsersAction, getUsersWithLinkAction} from './redux/thunks';
+import {
+  getUsersThunk,
+  getUsersWithLinkThunk,
+  searchUsersThunk,
+  refreshUsersThunk,
+  searchUsersWithLinkThunk,
+} from './redux/thunks';
 import {connect} from 'react-redux';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import {Colors} from '../../styles';
 import {ListUsersList} from '../../components/ListUsers';
 import {AppActivityIndicator} from '../../components/common/AppActivityIndicator';
-import {searchUser} from '../../api/users/searchUsers';
+import {searchUser} from '../../api/users/searchUsersAPI';
 import {SearchBar} from './../../components/common/SearchBar';
 import {UsersReducerType} from './redux/reducer';
 import {AppThunkType} from '../../store';
 
 type Props = ReturnType<typeof mapStateToProps> & {
   dispatch: Dispatch<AppThunkType>;
-  isSearching: boolean;
 };
 
-type State = {
-  isRefreshing: boolean;
-  keywordSearch: string;
-};
-
-class ListUsersScreen extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isRefreshing: false,
-      keywordSearch: '',
-    };
-  }
-
+class ListUsersScreen extends Component<Props> {
   async componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(getUsersAction());
-    const u = await searchUser('tom');
-    console.log('=================SEARCH USERS===================');
-    console.log(u);
-    console.log('====================================');
+    dispatch(getUsersThunk());
   }
 
-  onRefresh = async () => {
+  onRefresh = () => {
     const {dispatch} = this.props;
-    // this.setState({isRefreshing: true});
-    dispatch(getUsersAction());
-    // this.setState({isRefreshing: false});
+    dispatch(refreshUsersThunk());
   };
 
-  updateSearch = (keywordSearch: string) => {
-    this.setState({keywordSearch});
+  onSearch = (keyword: string) => {
+    const {dispatch} = this.props;
+    dispatch(searchUsersThunk(keyword));
   };
 
   loadMoreUsers = () => {
-    const {dispatch, nextLink} = this.props;
+    const {dispatch, nextLink, isSearchResults} = this.props;
     if (!nextLink) return;
 
-    dispatch(getUsersWithLinkAction(nextLink));
+    if (isSearchResults) {
+      dispatch(searchUsersWithLinkThunk(nextLink));
+    } else {
+      dispatch(getUsersWithLinkThunk(nextLink));
+    }
   };
 
   renderActivityIndicator = () => {
@@ -69,32 +60,35 @@ class ListUsersScreen extends Component<Props, State> {
   };
 
   renderUsersList = () => {
-    const {usersArray, isLoading, nextLink} = this.props;
+    const {
+      usersArray,
+      isLoading,
+      isRefreshing,
+      nextLink,
+      isLoadMoreFailed,
+    } = this.props;
     if (isLoading) return null;
-
+    console.log('==================renderUsersList==================');
+    console.log(usersArray);
+    console.log('====================================');
     return (
       <ListUsersList
         data={usersArray}
         onPress={() => console.log('pressed')}
-        isRefreshing={isLoading}
+        isRefreshing={isRefreshing}
         onRefresh={this.onRefresh}
         hasMoreData={!!nextLink}
         onEndReached={this.loadMoreUsers}
+        showLoadMoreButton={isLoadMoreFailed}
       />
     );
   };
 
   render() {
-    const {keywordSearch} = this.state;
     const {isSearching} = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        <SearchBar
-          onChangeText={this.updateSearch}
-          value={keywordSearch}
-          showLoading={isSearching}
-          onSubmit={a => console.log(a)}
-        />
+        <SearchBar showLoading={isSearching} onSubmit={this.onSearch} />
         {this.renderUsersList()}
         {this.renderActivityIndicator()}
       </SafeAreaView>
@@ -114,6 +108,9 @@ const mapStateToProps = ({users}: {users: UsersReducerType}) => ({
   isLoading: users.isLoading,
   nextLink: users.nextLink,
   isSearching: users.isSearching,
+  isRefreshing: users.isRefreshing,
+  isSearchResults: users.isSearchResults,
+  isLoadMoreFailed: users.isLoadMoreFailed,
 });
 
 export default connect(mapStateToProps)(ListUsersScreen);

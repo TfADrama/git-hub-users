@@ -5,16 +5,16 @@ import {Platform} from 'react-native';
 
 type Props = {
   placeholder?: string;
-  onChangeText: (keyword: string) => void;
-  value: string;
   showLoading?: boolean;
   onSubmit: (keyword: string) => void;
+  onClear?: () => void;
 };
 
 const SearchBar: FunctionComponent<Props> = ({
   placeholder = 'Type Here...',
   showLoading = false,
   onSubmit,
+  onClear,
 }: Props) => {
   const [keyword, setKeyword] = useState('');
 
@@ -33,6 +33,7 @@ const SearchBar: FunctionComponent<Props> = ({
       value={keyword}
       showLoading={showLoading}
       onSubmitEditing={onSubmitEditing}
+      onClear={onClear}
       platform={Platform.OS}
       returnKeyType={'search'}
     />
