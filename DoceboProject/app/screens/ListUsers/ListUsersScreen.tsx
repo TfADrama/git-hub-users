@@ -11,7 +11,6 @@ import {StyleSheet, SafeAreaView} from 'react-native';
 import {Colors} from '../../styles';
 import {ListUsersList} from '../../components/ListUsers';
 import {AppActivityIndicator} from '../../components/common/AppActivityIndicator';
-import {searchUser} from '../../api/users/searchUsersAPI';
 import {SearchBar} from './../../components/common/SearchBar';
 import {UsersReducerType} from './redux/reducer';
 import {AppThunkType} from '../../store';
@@ -37,8 +36,9 @@ class ListUsersScreen extends Component<Props> {
   };
 
   loadMoreUsers = () => {
-    const {dispatch, nextLink, isSearchResults} = this.props;
+    const {dispatch, nextLink, isSearchResults, isLoadingMore} = this.props;
     if (!nextLink) return;
+    if (isLoadingMore) return; // prevents duplicated requests when loading more
 
     if (isSearchResults) {
       dispatch(searchUsersWithLinkThunk(nextLink));
@@ -111,6 +111,7 @@ const mapStateToProps = ({users}: {users: UsersReducerType}) => ({
   isRefreshing: users.isRefreshing,
   isSearchResults: users.isSearchResults,
   isLoadMoreFailed: users.isLoadMoreFailed,
+  isLoadingMore: users.isLoadingMore,
 });
 
 export default connect(mapStateToProps)(ListUsersScreen);

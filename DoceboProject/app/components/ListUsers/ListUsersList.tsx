@@ -90,7 +90,7 @@ export const ListUsersList: FunctionComponent<Props> = ({
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
       onEndReached={!showLoadMoreButton ? onEndReached : undefined}
-      onEndReachedThreshold={0.01}
+      onEndReachedThreshold={0.01} //Fires only on the bottom
     />
   );
 };

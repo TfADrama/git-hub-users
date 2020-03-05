@@ -22,6 +22,7 @@ export interface UsersReducerType {
   isSearching: boolean;
   isSearchResults: boolean;
   isLoadMoreFailed: boolean;
+  isLoadingMore: boolean;
 }
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   isLoading: false,
   isRefreshing: false,
   isSearching: false,
+  isLoadingMore: false,
   isSearchResults: false,
   isLoadMoreFailed: false,
 };
@@ -61,6 +63,7 @@ export default function(
       return {
         ...state,
         isLoadMoreFailed: false,
+        isLoadingMore: true,
       };
 
     /**
@@ -85,6 +88,7 @@ export default function(
         ...state,
         users: [...state.users, ...action.payload.users],
         nextLink: action.payload.nextLink,
+        isLoadingMore: false,
       };
     case REFRESH_USERS_SUCCESS:
       return {
@@ -116,6 +120,7 @@ export default function(
       return {
         ...state,
         isLoadMoreFailed: true,
+        isLoadingMore: false,
       };
     default:
       return state;
