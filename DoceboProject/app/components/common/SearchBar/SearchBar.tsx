@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, CSSProperties} from 'react';
 import {SearchBar as SearchBarElements} from 'react-native-elements';
 import {FunctionComponent} from 'react';
-import {Platform} from 'react-native';
+import {Platform, StyleProp, ViewStyle} from 'react-native';
 
 type Props = {
   placeholder?: string;
   showLoading?: boolean;
   onSubmit: (keyword: string) => void;
   onClear?: () => void;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 const SearchBar: FunctionComponent<Props> = ({
@@ -15,6 +16,7 @@ const SearchBar: FunctionComponent<Props> = ({
   showLoading = false,
   onSubmit,
   onClear,
+  containerStyle,
 }: Props) => {
   const [keyword, setKeyword] = useState('');
 
@@ -36,6 +38,7 @@ const SearchBar: FunctionComponent<Props> = ({
       onClear={onClear}
       platform={Platform.OS}
       returnKeyType={'search'}
+      containerStyle={containerStyle}
     />
   );
 };

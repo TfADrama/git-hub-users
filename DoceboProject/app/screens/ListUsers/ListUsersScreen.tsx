@@ -8,6 +8,7 @@ import {
 } from './redux/thunks';
 import {connect} from 'react-redux';
 import {StyleSheet, SafeAreaView} from 'react-native';
+import {NavigationStackProp} from 'react-navigation-stack';
 import {Colors} from '../../styles';
 import {ListUsersList} from '../../components/ListUsers';
 import {AppActivityIndicator} from '../../components/common/AppActivityIndicator';
@@ -17,6 +18,7 @@ import {AppThunkType} from '../../store';
 
 type Props = ReturnType<typeof mapStateToProps> & {
   dispatch: Dispatch<AppThunkType>;
+  navigation: NavigationStackProp;
 };
 
 class ListUsersScreen extends Component<Props> {
@@ -35,9 +37,15 @@ class ListUsersScreen extends Component<Props> {
     dispatch(searchUsersThunk(keyword));
   };
 
+  onPressUser = () => {
+    const {navigation} = this.props;
+
+    navigation.navigate('UserDetail');
+  };
+
   loadMoreUsers = () => {
     const {dispatch, nextLink, isSearchResults, isLoadingMore} = this.props;
-    if (!nextLink) return;
+    if (!nextLink) return; // There are no more users to load
     if (isLoadingMore) return; // prevents duplicated requests when loading more
 
     if (isSearchResults) {
@@ -74,7 +82,7 @@ class ListUsersScreen extends Component<Props> {
     return (
       <ListUsersList
         data={usersArray}
-        onPress={() => console.log('pressed')}
+        onPress={this.onPressUser}
         isRefreshing={isRefreshing}
         onRefresh={this.onRefresh}
         hasMoreData={!!nextLink}
