@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {SEARCH_ENDPOINT, USERS_LIST_LIMIT} from '../constants';
+import {SEARCH_USERS_ENDPOINT, USERS_LIST_LIMIT} from '../constants';
 import parse from 'github-parse-link';
 
 /**
@@ -23,16 +23,8 @@ export const searchUser = async (
     },
   };
 
-  const {data, headers} = await axios.get(SEARCH_ENDPOINT, configure);
+  const {data, headers} = await axios.get(SEARCH_USERS_ENDPOINT, configure);
   const {next} = parse(headers.link);
 
   return {data, next};
 };
-
-/**
- *
- * // TODO:
- * O mesmo Load more next link chamado duas vezes seguidas (parar isto)
- * MELHORAR PERFORMACE DA LISTA (usar ref para alterar a image?)
- *
- */

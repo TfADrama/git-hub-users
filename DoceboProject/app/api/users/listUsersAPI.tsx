@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {USERS_ENDPOINT} from '../constants';
+import {LIST_USERS_ENDPOINT} from '../constants';
 import parse from 'github-parse-link';
 
 /**
@@ -19,7 +19,7 @@ export const fetchUsers = async (limit = 10): Promise<Object> => {
     },
   };
 
-  const response = await axios.get(USERS_ENDPOINT, configure);
+  const response = await axios.get(LIST_USERS_ENDPOINT, configure);
   const data = response.data;
   const {next} = parse(response.headers.link);
 

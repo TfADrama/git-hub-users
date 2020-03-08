@@ -5,6 +5,9 @@ import UserDetailScreen from '../../screens/UserDetail/UserDetailScreen';
 export default createStackNavigator({
   ListUsers: {
     screen: ListUsersScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
   },
   UserDetail: {
     screen: UserDetailScreen,

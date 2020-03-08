@@ -2,7 +2,7 @@ import React, {FunctionComponent} from 'react';
 import {View, StyleSheet, Text, Image, Platform} from 'react-native';
 import {RoundedImage} from '../common/RoundedImage';
 import AccountCircle from '../../assets/icons/AccountCircle/baseline_account_circle_white_48pt.png';
-import {PROFILE_IMG_SIZE, PROFILE_IMG_RADIUS} from '../../styles/spacing';
+import {MIN_PROFILE_IMG_SIZE, PROFILE_IMG_RADIUS} from '../../styles/spacing';
 import {Spacing, Colors} from '../../styles';
 import {Icon} from 'react-native-elements';
 
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   userImg: {
-    height: PROFILE_IMG_SIZE,
-    width: PROFILE_IMG_SIZE,
+    height: MIN_PROFILE_IMG_SIZE,
+    width: MIN_PROFILE_IMG_SIZE,
     borderRadius: PROFILE_IMG_RADIUS,
   },
   textLbl: {
