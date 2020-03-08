@@ -12,6 +12,9 @@ import {
 import {Spacing, Typography} from '../../styles';
 import {IconInfo} from '../../components/common/IconInfo';
 import AccountCircle from '../../assets/icons/AccountCircle/baseline_account_circle_white_48pt.png';
+import EmailItem from './EmailItem';
+import LocationItem from './LocationItem';
+import ExternalLinkItem from './ExternalLinkItem';
 
 interface Props {
   externalLink: string;
@@ -28,61 +31,6 @@ const BasicUserInfo: FunctionComponent<Props> = ({
   sourceImg,
   name,
 }) => {
-  //TODO: Meter isto em components
-  function renderEmailItem() {
-    if (!email) return null;
-    const onPress = () => {
-      Linking.openURL(`mailto:${email}`);
-    };
-
-    return (
-      <IconInfo
-        iconName={'email'}
-        iconType={'material-icons'}
-        onPress={onPress}
-        value={email}
-      />
-    );
-  }
-
-  function renderLocationItem() {
-    if (!location) return null;
-
-    const onPress = () => {
-      Platform.select({
-        ios: Linking.openURL(`http://maps.apple.com/maps?q=${location}`),
-        android: Linking.openURL(`http://maps.google.com/maps?q=${location}`),
-      });
-    };
-
-    return (
-      <IconInfo
-        iconName={'location-on'}
-        iconType={'material-icons'}
-        onPress={onPress}
-        value={location}
-      />
-    );
-  }
-
-  function renderLinkItem() {
-    if (!externalLink) return null;
-    const onPress = () => {
-      Linking.openURL(externalLink);
-    };
-
-    return (
-      <IconInfo
-        iconName={'external-link'}
-        iconType={'font-awesome'}
-        onPress={onPress}
-        value={externalLink}
-      />
-    );
-  }
-
-  console.log('sasa', name);
-
   return (
     <CardContainer style={styles.container}>
       <View style={styles.topSection}>
@@ -95,9 +43,9 @@ const BasicUserInfo: FunctionComponent<Props> = ({
         {name && <Text style={styles.title}>{name}</Text>}
       </View>
 
-      {renderEmailItem()}
-      {renderLocationItem()}
-      {renderLinkItem()}
+      <EmailItem email={email} />
+      <LocationItem location={location} />
+      <ExternalLinkItem externalLink={externalLink} />
     </CardContainer>
   );
 };
