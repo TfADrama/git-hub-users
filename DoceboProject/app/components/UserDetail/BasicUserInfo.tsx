@@ -1,16 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {CardContainer} from '../../components/common/Card';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ImageSourcePropType,
-  Linking,
-  Platform,
-} from 'react-native';
+import {Text, View, StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import {Spacing, Typography} from '../../styles';
-import {IconInfo} from '../../components/common/IconInfo';
 import AccountCircle from '../../assets/icons/AccountCircle/baseline_account_circle_white_48pt.png';
 import EmailItem from './EmailItem';
 import LocationItem from './LocationItem';

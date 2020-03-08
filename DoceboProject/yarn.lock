@@ -5815,6 +5815,11 @@ react-native-status-bar-height@^2.2.0:
   resolved "https://repo.impresa.pt/nexus/repository/Impresa-npm-group/react-native-status-bar-height/-/react-native-status-bar-height-2.4.0.tgz#de8cee4bb733a196167210d2d0bc1fa10acba3e3"
   integrity sha512-pWvZFlyIHiuxLugLioq97vXiaGSovFXEyxt76wQtbq0gxv4dGXMPqYow46UmpwOgeJpBhqL1E0EKxnfJRrFz5w==
 
+react-native-tab-view@^2.13.0:
+  version "2.13.0"
+  resolved "https://repo.impresa.pt/nexus/repository/Impresa-npm-group/react-native-tab-view/-/react-native-tab-view-2.13.0.tgz#23037aa43b0f8f682ddc20415a4baaaf6f82ae8f"
+  integrity sha512-AeYbp/u91+D/C9+PmVEPBmFb3ixv8IkLMC3Sc5MajJ/fg0Zl3Of+BcEknBvTnKoe7Fj2y8+Qf9zorBbh5xzh4A==
+
 react-native-typescript-transformer@^1.2.13:
   version "1.2.13"
   resolved "https://repo.impresa.pt/nexus/repository/Impresa-npm-group/react-native-typescript-transformer/-/react-native-typescript-transformer-1.2.13.tgz#be92a3d110dbb2cf2f4aebe60a935be124cfb7ed"
