@@ -22,4 +22,4 @@ const EmailItem: FunctionComponent<Props> = ({email}) => {
   );
 };
 
-export default EmailItem;
+export default React.memo(EmailItem);

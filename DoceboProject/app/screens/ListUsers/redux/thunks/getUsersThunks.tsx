@@ -1,4 +1,4 @@
-import {fetchUsers, fetchUsersWithLink} from '../../../../api/users';
+import {fetchUsers, fetchMoreWithLink} from '../../../../api';
 import {
   getUsersRequestAction,
   getUsersSuccessAction,
@@ -33,7 +33,7 @@ export const getUsersWithLinkThunk = (
   dispatch(getMoreUsersRequestAction());
 
   try {
-    const {data, next} = await fetchUsersWithLink(link);
+    const {data, next} = await fetchMoreWithLink(link);
 
     dispatch(
       getMoreUsersSuccessAction({

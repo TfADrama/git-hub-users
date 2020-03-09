@@ -1,5 +1,5 @@
 import {AppThunkType} from '../../../../store';
-import {searchUser} from '../../../../api/users';
+import {searchUser} from '../../../../api';
 import {
   searchUsersSuccessAction,
   searchUsersFailureAction,
@@ -8,7 +8,7 @@ import {
   getMoreUsersFailureAction,
   getMoreUsersSuccessAction,
 } from '../actions';
-import {fetchUsersWithLink} from '../../../../api/users/listUsersAPI';
+import {fetchMoreWithLink} from '../../../../api';
 
 export const searchUsersThunk = (
   keyword: string,
@@ -36,7 +36,7 @@ export const searchUsersWithLinkThunk = (
   dispatch(getMoreUsersRequestAction());
 
   try {
-    const {data, next} = await fetchUsersWithLink(link);
+    const {data, next} = await fetchMoreWithLink(link);
 
     dispatch(
       getMoreUsersSuccessAction({

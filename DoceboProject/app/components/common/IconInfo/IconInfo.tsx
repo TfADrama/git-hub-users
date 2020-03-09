@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Colors, Spacing, Typography} from '../../../styles';
+import {Spacing, Typography} from '../../../styles';
 import {IconType, Icon} from 'react-native-elements';
 
 interface Props {
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     marginVertical: Spacing.MIN_SPACING,
   },
   icon: {
-    tintColor: Colors.primaryColor.dark,
     marginRight: Spacing.DEFAULT_SPACING,
   },
   text: {

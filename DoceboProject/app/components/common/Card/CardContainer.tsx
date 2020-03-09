@@ -9,4 +9,4 @@ interface Props {
 const CardContainer: FunctionComponent<Props> = ({children, style}) => (
   <View style={[styles.cardContainer, style]}>{children}</View>
 );
-export default CardContainer;
+export default React.memo(CardContainer);

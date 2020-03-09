@@ -37,10 +37,11 @@ class ListUsersScreen extends Component<Props> {
     dispatch(searchUsersThunk(keyword));
   };
 
-  onPressUser = (username: string) => {
-    const {navigation} = this.props;
+  onPressUser = (index: number) => {
+    const {navigation, usersArray} = this.props;
+    const user = usersArray[index];
 
-    navigation.navigate('UserDetail', {username});
+    navigation.navigate('UserDetail', {username: user.login});
   };
 
   loadMoreUsers = () => {

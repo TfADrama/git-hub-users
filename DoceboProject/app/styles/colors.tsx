@@ -9,3 +9,5 @@ export const secondaryColor = {
   light: '#F1F8FF',
   // dark: '#836fa9',
 };
+
+export const starColor = '#ffeb3b';

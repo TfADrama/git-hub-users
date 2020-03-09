@@ -22,6 +22,8 @@ const BasicUserInfo: FunctionComponent<Props> = ({
   sourceImg,
   name,
 }) => {
+  console.log('rendering BasicUserInfo');
+
   return (
     <CardContainer style={styles.container}>
       <View style={styles.topSection}>
@@ -61,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BasicUserInfo;
+export default React.memo(BasicUserInfo);

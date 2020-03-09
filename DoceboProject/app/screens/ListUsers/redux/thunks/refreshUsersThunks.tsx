@@ -1,4 +1,4 @@
-import {fetchUsers} from '../../../../api/users';
+import {fetchUsers} from '../../../../api';
 import {
   refreshUsersRequestAction,
   refreshUsersSuccessAction,

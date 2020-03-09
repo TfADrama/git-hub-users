@@ -26,4 +26,4 @@ const LocationItem: FunctionComponent<Props> = ({location}) => {
   );
 };
 
-export default LocationItem;
+export default React.memo(LocationItem);

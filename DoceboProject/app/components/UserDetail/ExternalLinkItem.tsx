@@ -22,4 +22,4 @@ const ExternalLinkItem: FunctionComponent<Props> = ({externalLink}) => {
   );
 };
 
-export default ExternalLinkItem;
+export default React.memo(ExternalLinkItem);

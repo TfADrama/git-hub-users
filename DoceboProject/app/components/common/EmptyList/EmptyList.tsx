@@ -12,7 +12,7 @@ const EmptyList: FunctionComponent<EmptyListProps> = ({title}) => (
     <Icon
       name="users"
       type="font-awesome"
-      color={Colors.primaryColor.normal}
+      color={Colors.secondaryColor.normal}
       size={50}
       iconStyle={styles.icon}
     />
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   text: {
     ...Typography.title1,
-    color: Colors.primaryColor.normal,
+    color: Colors.secondaryColor.normal,
   },
   icon: {
     marginBottom: Spacing.MAX_SPACING,
