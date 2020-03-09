@@ -1,6 +1,6 @@
 # git-hub-users
 
-## About 'Find my hotel'
+## About this App
 
 
 The APP consumes data from the GitHub API. 
