@@ -17,8 +17,8 @@ const AppRefreshControl: FunctionComponent<AppRefreshControlProps> = ({
     refreshing={isRefreshing}
     onRefresh={onRefresh}
     title={title}
-    tintColor={Colors.primaryColor.dark}
-    titleColor={Colors.primaryColor.dark}
+    tintColor={Colors.primaryColor.light}
+    titleColor={Colors.primaryColor.light}
   />
 );
 
