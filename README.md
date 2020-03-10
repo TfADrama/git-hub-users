@@ -3,18 +3,34 @@
 ## About this App
 
 
-The APP consumes data from the GitHub API. 
+The APP consumes data from the [GitHub API](https://developer.github.com/v3/). 
 
 
 The app displays the list of all users and details from the each user, including a list of his repositories.
 
-I have provided [a video]() regarding the app and all the possible functionalities.
+I have provided [a video](https://1drv.ms/u/s!Apld_UHHLn7Cgv9FLmg979JrY4jxqw?e=g3zHgc) regarding the app and all the possible functionalities.
 
 
 To develop this app it was used some external libs:
-- [react-navigation](https://reactnavigation.org/docs/en/4.x/getting-started.html);
-- [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image);
+- [react-navigation](https://reactnavigation.org/docs/en/4.x/getting-started.html)
+- [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) For Image fetching and image caching
+- [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view)
+- [react-native-elements](https://react-native-elements.github.io/react-native-elements/) As a UI kit library
+- [axios](https://github.com/axios/axios) As the network library
+- [redux](https://redux.js.org/)
+- [redux-thunk](https://github.com/reduxjs/redux-thunk) for the side effects
 
+
+For the type check I used **type-script**, it was the first time using it.
+I followed the redux pattern with redux-thunk for the data and api calls for one screen, the other i applied the component state with hooks and API calls. 
+The mobile pattern used was MVC.
+
+**In the future** 
+- I want to have the user detail screen with hooks and redux, if i have time.
+- Add more types with typescrpt
+- Create filters for the results ( sort & direction via API ) 
+- Parse the API rsponse in order to only get what i want and appy type checking to it.
+ 
 
 ## Before starting
 I assume you have a MAC setted up with npm, react native, xcode, android studio... If not, i leave here this article to follow some [steps in order to have a react-native environment](https://nandovieira.com/setting-up-react-native-on-macos-mojave).
