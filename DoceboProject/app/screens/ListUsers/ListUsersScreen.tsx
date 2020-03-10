@@ -15,6 +15,7 @@ import {AppActivityIndicator} from '../../components/common/AppActivityIndicator
 import {SearchBar} from './../../components/common/SearchBar';
 import {UsersReducerType} from './redux/reducer';
 import {AppThunkType} from '../../store';
+import {USERS_LIST_LOADING} from '../../utils/strings';
 
 type Props = ReturnType<typeof mapStateToProps> & {
   dispatch: Dispatch<AppThunkType>;
@@ -62,8 +63,8 @@ class ListUsersScreen extends Component<Props> {
 
     return (
       <AppActivityIndicator
-        text={'LOADING_HOTELS'}
-        color={Colors.primaryColor.normal}
+        text={USERS_LIST_LOADING}
+        color={Colors.primaryColor.light}
       />
     );
   };
@@ -77,9 +78,6 @@ class ListUsersScreen extends Component<Props> {
       isLoadMoreFailed,
     } = this.props;
     if (isLoading) return null;
-    console.log('==================renderUsersList==================');
-    console.log(usersArray);
-    console.log('====================================');
     return (
       <ListUsersList
         data={usersArray}

@@ -1,6 +1,10 @@
 import React, {FunctionComponent} from 'react';
 import ListUsersItem from './ListUsersItem';
 import {BaseList} from '../common/BaseList';
+import {
+  EMPTY_LIST_TITLE,
+  USERS_LIST_PULL_TO_REFRESH_TEXT,
+} from '../../utils/strings';
 
 type Props = {
   data: Array<object>;
@@ -34,8 +38,8 @@ export const ListUsersList: FunctionComponent<Props> = ({
       onEndReached={onEndReached}
       onRefresh={onRefresh}
       onItemPress={onPress}
-      emptyListTitle={''}
-      pullToRefreshTitle={''}
+      emptyListTitle={EMPTY_LIST_TITLE}
+      pullToRefreshTitle={USERS_LIST_PULL_TO_REFRESH_TEXT}
       renderItem={renderItem}
     />
   );
