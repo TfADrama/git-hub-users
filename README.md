@@ -30,7 +30,7 @@ The mobile pattern used was MVC.
 - Add more types with typescrpt
 - Create filters for the results ( sort & direction via API ) 
 - Parse the API rsponse in order to only get what i want and appy type checking to it.
-- Improve the design for the repositories list screen.
+- Improve the design for the repositories list screen and add some colors to some components.
 - Organize and refactor code.
  
 
